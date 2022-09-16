@@ -1,0 +1,51 @@
+import React, { useContext, useState } from "react";
+import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { useFetch } from "./../../hooks";
+import { AppContext } from "../../store";
+
+const SchoolsList: React.FC = () => {
+	// Get list of schools
+	const { data, error } = useFetch();
+	const { schools } = data;
+
+	// Get current camp, school
+	const { currentCamp, currentSchool, updateSchool } = useContext(AppContext);
+	const handleChange = (event: SelectChangeEvent) => {
+		updateSchool(event.target.value, true);
+	};
+
+	return (
+		<>
+			{!schools || error ? (
+				<div>Loading</div>
+			) : (
+				<FormControl fullWidth>
+					<InputLabel id="demo-simple-select-label">
+						Select School
+					</InputLabel>
+					<Select
+						labelId="demo-simple-select-label"
+						id="demo-simple-select"
+						value={currentSchool}
+						label="School"
+						onChange={handleChange}
+					>
+						<MenuItem value={""}>Select School</MenuItem>
+						{schools.length ? (
+							schools.map((item: any) => (
+								<MenuItem key={item.id} value={item.school}>
+									{item.school}
+								</MenuItem>
+							))
+						) : (
+							<MenuItem></MenuItem>
+						)}
+					</Select>
+				</FormControl>
+			)}
+		</>
+	);
+};
+
+export default SchoolsList;
