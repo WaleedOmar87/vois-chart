@@ -3,8 +3,7 @@ import { default as appReducer, initialState, ChartType } from "./appReducer";
 export const AppContext = createContext(initialState);
 const AppProvider = ({ children }: any) => {
 	const [state, dispatch] = useReducer(appReducer, initialState);
-
-	const updateCountry = (country: string) => {
+	const updateCountry = (country: string): void => {
 		dispatch({
 			type: "UPDATE_COUNTRY",
 			payload: {
@@ -13,7 +12,7 @@ const AppProvider = ({ children }: any) => {
 			},
 		});
 	};
-	const updateCamp = (camp: string) => {
+	const updateCamp = (camp: string): void => {
 		dispatch({
 			type: "UPDATE_CAMP",
 			payload: {
@@ -22,12 +21,32 @@ const AppProvider = ({ children }: any) => {
 			},
 		});
 	};
-	const updateSchool = (school: string) => {
+	const updateSchool = (school: string): void => {
 		dispatch({
 			type: "UPDATE_SCHOOL",
 			payload: {
 				...state,
 				school: school,
+			},
+		});
+	};
+
+	const updateTheme = (themeMode: string): void => {
+		dispatch({
+			type: "UPDATE_THEME",
+			payload: {
+				...state,
+				themeMode: themeMode,
+			},
+		});
+	};
+
+	const updateLoading = (status: boolean): void => {
+		dispatch({
+			type: "UPDATE_LOADING",
+			payload: {
+				...state,
+				loading: status,
 			},
 		});
 	};
@@ -41,7 +60,11 @@ const AppProvider = ({ children }: any) => {
 					selectedCamp: state.selectedCamp,
 					updateSchool: updateSchool,
 					updateCamp: updateCamp,
-					updateCountry: updateCountry
+					updateCountry: updateCountry,
+					themeMode: state.themeMode,
+					updateTheme: updateTheme,
+					loading: state.loading,
+					updateLoading: updateLoading,
 				} as any
 			}
 		>

@@ -49,10 +49,25 @@ export const groupSchoolsByMonth = (schools: any): [] => {
 	return updatedData;
 };
 // Filter data based on country
-export const filterDataByCountry = (data: [], country: string): object => {
-	const getAllSchools = data.filter(
-		(record: any) => record.country === country
-	);
+export const filterChartData = (
+	data: [],
+	country: string,
+	camp: string,
+	school: string
+): object => {
+	const getAllSchools = data.filter((record: any) => {
+		let condition = true;
+		if (country !== "") {
+			condition = record.country === country;
+		}
+		if (camp !== "") {
+			condition = record.camp === camp;
+		}
+		if (school !== "" && school !== "all") {
+			condition = record.school === school;
+		}
+		return condition;
+	});
 	const filterSchools = removeDuplicates(getAllSchools, "school");
 	return groupSchoolsByMonth(filterSchools);
 };

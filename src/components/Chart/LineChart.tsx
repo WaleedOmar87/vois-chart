@@ -12,7 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useFetch } from "../../hooks";
 import { AppContext } from "./../../store";
-import { filterDataByCountry } from "./../../helpers";
+import { filterChartData } from "./../../helpers";
 
 // Register Chart Types
 ChartJS.register(
@@ -53,10 +53,15 @@ const LineChart: React.FC = () => {
 	// Update filtered chart data based on county, camp or school change
 	useEffect(() => {
 		const getData = Object.keys(data).length
-			? filterDataByCountry(data.allData, selectedCountry)
+			? filterChartData(
+					data.allData,
+					selectedCountry,
+					selectedCamp,
+					selectedSchool
+			  )
 			: [];
 		setChartData({ ...chartData, datasets: getData });
-	}, [selectedCountry]);
+	}, [selectedCountry, selectedCamp, selectedSchool]);
 
 	return (
 		<>
@@ -69,7 +74,7 @@ const LineChart: React.FC = () => {
 						plugins: {
 							title: {
 								display: true,
-								text: "Lessons",
+								text: "Click to toggle schools",
 							},
 							legend: {
 								display: true,

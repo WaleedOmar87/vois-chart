@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
 	AppBar,
 	Box,
@@ -8,12 +8,12 @@ import {
 	FormGroup,
 	Switch,
 } from "@mui/material";
-import { themeContext } from "../../store";
+import { AppContext } from "../../store";
 
 const Header: React.FC = () => {
-	const { themeMode, setThemeMode } = useContext(themeContext);
+	const { themeMode, updateTheme } = useContext(AppContext);
 	const handleChange = (event: any) => {
-		setThemeMode(event.target.checked ? "dark" : "light");
+		updateTheme(event.target.checked ? "dark" : "light");
 	};
 	return (
 		<Box sx={{ flexGrow: 1 }}>

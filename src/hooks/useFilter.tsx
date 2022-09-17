@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useFetch } from "./";
 import { AppContext } from "../store";
-import { removeDuplicates, filterDataByCountry } from "./../helpers";
+import { removeDuplicates, filterChartData } from "./../helpers";
 
 const useFilter = () => {
 	// Get data from the api
@@ -20,7 +20,7 @@ const useFilter = () => {
 
 	// Filter data, return current school data
 	const filterData = () => {
-		return filterDataByCountry(data, selectedCountry);
+		return filterChartData(data, selectedCountry , '' , '');
 	};
 
 	useEffect(() => {

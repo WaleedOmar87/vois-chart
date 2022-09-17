@@ -1,39 +1,62 @@
-import React, { useMemo, useContext } from "react";
-import { Grid, CssBaseline, PaletteMode } from "@mui/material";
-import { Header, Navigation, Chart } from "./../../components";
+import React, { useState, useContext, useEffect } from "react";
+import { Grid, CssBaseline } from "@mui/material";
+import { Header, Navigation, Chart, Loading } from "./../../components";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { themeContext, AppProvider } from "../../store";
+import { AppContext } from "../../store";
 import "./../../assets/css/App.css";
 
 /* Home Page Container */
 const Home: React.FC = () => {
-	// Get current theme mode
-	const { themeMode } = useContext(themeContext);
-	const theme = useMemo(() => {
-		return createTheme({
+	// Get current theme mode: string
+	const { themeMode, loading, updateLoading } = useContext(AppContext);
+	const [currentTheme, setCurrentTheme] = useState<any>(
+		createTheme({
 			palette: {
-				mode: themeMode as PaletteMode,
+				mode: themeMode as any,
 			},
-		});
+		})
+	);
+
+	// Update theme when themeMode value changes
+	useEffect(() => {
+		return setCurrentTheme(
+			createTheme({
+				palette: {
+					mode: themeMode as any,
+				},
+			})
+		);
 	}, [themeMode]);
 
+	// Remove loading screen on mount
+	useEffect(() => {
+		// timeout is used for testing purposes, could be removed on production
+		setTimeout(() => {
+			updateLoading(false);
+		}, 1000);
+	}, []);
+
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<AppProvider>
-				<Grid container spacing={2}>
-					<Grid item xs={12}>
-						<Header />
+		<>
+			<ThemeProvider theme={currentTheme}>
+				<CssBaseline />
+				{loading ? (
+					<Loading />
+				) : (
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<Header />
+						</Grid>
+						<Grid item xs={12}>
+							<Navigation />
+						</Grid>
+						<Grid item xs={12}>
+							<Chart />
+						</Grid>
 					</Grid>
-					<Grid item xs={12}>
-						<Navigation />
-					</Grid>
-					<Grid item xs={12}>
-						<Chart />
-					</Grid>
-				</Grid>
-			</AppProvider>
-		</ThemeProvider>
+				)}
+			</ThemeProvider>
+		</>
 	);
 };
 

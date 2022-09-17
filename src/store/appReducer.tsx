@@ -1,10 +1,14 @@
 export const initialState = {
-	selectedCountry: "Egypt",
+	selectedCountry: "",
+	updateCountry: (updateCountry: string) => {},
 	selectedCamp: "",
+	updateCamp: (camp: string, basedOnCountry: boolean) => {},
 	selectedSchool: "",
 	updateSchool: (school: string, basedOnCamp: boolean) => {},
-	updateCamp: (camp: string, basedOnCountry: boolean) => {},
-	updateCountry: (updateCountry: string) => {},
+	themeMode: "dark",
+	updateTheme: (theme: string) => {},
+	loading: true,
+	updateLoading: (status: boolean) => {}
 };
 
 export type ChartType = typeof initialState;
@@ -28,6 +32,18 @@ const appReducer = (state: ChartType, action: any): any => {
 			return {
 				...state,
 				selectedSchool: payload.school,
+			};
+			break;
+		case "UPDATE_THEME":
+			return {
+				...state,
+				themeMode: payload.themeMode,
+			};
+			break;
+		case "UPDATE_LOADING":
+			return {
+				...state,
+				loading: payload.loading,
 			};
 			break;
 		default:

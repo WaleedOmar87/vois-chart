@@ -9,9 +9,9 @@ const Chart: React.FC = () => {
 				<h4 className="section-heading">Number Of Lessons</h4>
 				<LineChart />
 			</Grid>
-			<Grid item xs={4}>
+			{/* <Grid item xs={4}>
 				Chart Sidebar
-			</Grid>
+			</Grid> */}
 		</Grid>
 	);
 };
