@@ -26,7 +26,7 @@ const useFetch = () => {
 			// Update schools, camps and countries
 			setData({
 				...data,
-				data: resData,
+				allData: resData,
 				countries: filterData(resData, "country"),
 				camps: filterData(resData, "camp"),
 				schools: filterData(resData, "school"),

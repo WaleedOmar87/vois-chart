@@ -16,10 +16,6 @@ const CampsList: React.FC = () => {
 		updateCamp(event.target.value, true);
 	};
 
-	useEffect(() => {
-		console.log(camps);
-	}, []);
-
 	return (
 		<>
 			{!camps || error ? (

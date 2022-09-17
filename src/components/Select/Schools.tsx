@@ -10,7 +10,7 @@ const SchoolsList: React.FC = () => {
 	const { schools } = data;
 
 	// Get current camp, school
-	const { currentCamp, currentSchool, updateSchool } = useContext(AppContext);
+	const { currentSchool, updateSchool } = useContext(AppContext);
 	const handleChange = (event: SelectChangeEvent) => {
 		updateSchool(event.target.value, true);
 	};
@@ -31,7 +31,7 @@ const SchoolsList: React.FC = () => {
 						label="School"
 						onChange={handleChange}
 					>
-						<MenuItem value={""}>Select School</MenuItem>
+						<MenuItem value={"all"}>Show All</MenuItem>
 						{schools.length ? (
 							schools.map((item: any) => (
 								<MenuItem key={item.id} value={item.school}>
