@@ -10,7 +10,7 @@ const CampsList: React.FC = () => {
 	const { camps } = data;
 
 	// Fetch camps based on current selected country
-	const { currentCamp, updateCamp } = useContext(AppContext);
+	const { selectedCamp, updateCamp } = useContext(AppContext);
 	// Set selected camp
 	const handleChange = (event: SelectChangeEvent) => {
 		updateCamp(event.target.value, true);
@@ -28,7 +28,7 @@ const CampsList: React.FC = () => {
 					<Select
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
-						value={currentCamp}
+						value={selectedCamp}
 						label="Camp"
 						onChange={handleChange}
 					>

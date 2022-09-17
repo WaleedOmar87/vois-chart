@@ -1,7 +1,7 @@
 export const initialState = {
-	currentCountry: "Egypt",
-	currentCamp: "",
-	currentSchool: "",
+	selectedCountry: "Egypt",
+	selectedCamp: "",
+	selectedSchool: "",
 	updateSchool: (school: string, basedOnCamp: boolean) => {},
 	updateCamp: (camp: string, basedOnCountry: boolean) => {},
 	updateCountry: (updateCountry: string) => {},
@@ -15,19 +15,19 @@ const appReducer = (state: ChartType, action: any): any => {
 		case "UPDATE_COUNTRY":
 			return {
 				...state,
-				currentCountry: payload.country,
+				selectedCountry: payload.country,
 			};
 			break;
 		case "UPDATE_CAMP":
 			return {
 				...state,
-				currentCamp: payload.camp,
+				selectedCamp: payload.camp,
 			};
 			break;
 		case "UPDATE_SCHOOL":
 			return {
 				...state,
-				currentSchool: payload.school,
+				selectedSchool: payload.school,
 			};
 			break;
 		default:

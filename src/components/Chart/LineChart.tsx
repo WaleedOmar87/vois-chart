@@ -29,54 +29,38 @@ ChartJS.register(
 const LineChart: React.FC = () => {
 	// Get list of data, current country school and camp
 	const { data, error } = useFetch();
-	const { currentCountry, currentSchool, currentCamp } = useContext(
+	const { selectedCountry, selectedCamp, selectedSchool } = useContext(
 		AppContext
 	);
-	const [filteredData, setFilteredData] = useState<any>({});
+	const [chartData, setChartData] = useState<any>({
+		labels: [
+			"Jan",
+			"Feb",
+			"March",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		],
+		datasets: [],
+	});
 
 	// Update filtered chart data based on county, camp or school change
 	useEffect(() => {
-		console.log(data);
 		const getData = Object.keys(data).length
-			? filterDataByCountry(data.allData, currentCountry)
+			? filterDataByCountry(data.allData, selectedCountry)
 			: [];
-		setFilteredData(getData);
-	}, [currentCountry]);
-
-	// Const chart style
-	const getChartStyle = (index: number): object => {
-		return {
-			backgroundColor: ["red", "green"],
-			borderWidth: 1,
-			borderColor: "red",
-		};
-	};
-
-	// Chart labels
-	const chartLabels = [
-		"Jan",
-		"Feb",
-		"March",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dec",
-	];
-
-	// All chart data
-	const chartData = {
-		labels: chartLabels,
-		datasets: filteredData,
-	};
+		setChartData({ ...chartData, datasets: getData });
+	}, [selectedCountry]);
 
 	return (
 		<>
-			{error || !data.length ? (
+			{error || data.length < 1 ? (
 				<span>Error loading chart data</span>
 			) : (
 				<Line

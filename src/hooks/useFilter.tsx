@@ -9,7 +9,7 @@ const useFilter = () => {
 	const { camps } = data;
 
 	// Get current country, camp and school
-	const { currentSchool, currentCamp, currentCountry } = useContext(
+	const { selectedSchool, selectedCamp, selectedCountry } = useContext(
 		AppContext
 	);
 	// Store filtered schools
@@ -20,11 +20,10 @@ const useFilter = () => {
 
 	// Filter data, return current school data
 	const filterData = () => {
-		return filterDataByCountry(data, currentCountry);
+		return filterDataByCountry(data, selectedCountry);
 	};
 
 	useEffect(() => {
-		console.log(camps)
 		filterData();
 	}, []);
 

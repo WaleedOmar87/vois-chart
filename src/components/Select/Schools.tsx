@@ -10,7 +10,7 @@ const SchoolsList: React.FC = () => {
 	const { schools } = data;
 
 	// Get current camp, school
-	const { currentSchool, updateSchool } = useContext(AppContext);
+	const { selectedSchool, updateSchool } = useContext(AppContext);
 	const handleChange = (event: SelectChangeEvent) => {
 		updateSchool(event.target.value, true);
 	};
@@ -27,7 +27,7 @@ const SchoolsList: React.FC = () => {
 					<Select
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
-						value={currentSchool}
+						value={selectedSchool}
 						label="School"
 						onChange={handleChange}
 					>

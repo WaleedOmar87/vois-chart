@@ -10,7 +10,7 @@ const CountriesList: React.FC = () => {
 	const { countries } = data;
 
 	// Set selected country
-	const { currentCountry, updateCountry } = useContext(AppContext);
+	const { selectedCountry, updateCountry } = useContext(AppContext);
 
 	// Update current country when select changes
 	const handleChange = (event: SelectChangeEvent) => {
@@ -29,7 +29,7 @@ const CountriesList: React.FC = () => {
 					<Select
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
-						value={currentCountry}
+						value={selectedCountry}
 						label="Country"
 						onChange={handleChange}
 					>
