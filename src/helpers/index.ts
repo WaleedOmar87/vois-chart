@@ -41,8 +41,12 @@ export const groupSchoolsByMonth = (schools: any): [] => {
 			label: entry.school,
 			data: schoolMonthsData,
 			backgroundColor: accentColorList,
-			borderWidth: 1,
+			borderWidth: "2",
 			borderColor: accentColorList[0],
+			tension: 0.2,
+			spanGaps: true,
+			pointHitRadius: "2",
+			pointRadius: "2",
 		});
 	});
 

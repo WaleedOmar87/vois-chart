@@ -32,7 +32,7 @@ const CampsList: React.FC = () => {
 						label="Camp"
 						onChange={handleChange}
 					>
-						<MenuItem value={""}>Select Camp</MenuItem>
+						<MenuItem>Select Camp</MenuItem>
 						{camps.length ? (
 							camps.map((item: any) => (
 								<MenuItem key={item.id} value={item.camp}>

@@ -10,9 +10,6 @@ const Navigation: React.FC = () => {
 			container
 			spacing={4}
 		>
-			<Grid item xs={12}>
-				<h1 className="page-heading">Number of Lessons</h1>
-			</Grid>
 			<Grid item xs={4}>
 				<CountriesList />
 			</Grid>

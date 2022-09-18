@@ -33,7 +33,6 @@ const CountriesList: React.FC = () => {
 						label="Country"
 						onChange={handleChange}
 					>
-						<MenuItem>Select Country</MenuItem>
 						{countries.length ? (
 							countries.map((item: any) => (
 								<MenuItem key={item.id} value={item.country}>

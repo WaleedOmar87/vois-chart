@@ -1,5 +1,5 @@
 export const initialState = {
-	selectedCountry: "",
+	selectedCountry: "Egypt",
 	updateCountry: (updateCountry: string) => {},
 	selectedCamp: "",
 	updateCamp: (camp: string, basedOnCountry: boolean) => {},

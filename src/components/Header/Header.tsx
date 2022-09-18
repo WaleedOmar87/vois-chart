@@ -22,6 +22,7 @@ const Header: React.FC = () => {
 				position="static"
 				sx={{
 					backgroundColor: "#3e3e3e",
+					marginBottom: '1em'
 				}}
 			>
 				<Toolbar>
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
 						component="div"
 						sx={{ flexGrow: 1 }}
 					>
-						Dashboard
+						Number Of Lessons
 					</Typography>
 					<FormGroup>
 						<FormControlLabel

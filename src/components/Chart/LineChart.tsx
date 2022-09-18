@@ -65,7 +65,7 @@ const LineChart: React.FC = () => {
 			  )
 			: [];
 		setChartData({ ...chartData, datasets: getData });
-	}, [selectedCountry, selectedCamp, selectedSchool]);
+	}, [selectedCountry, selectedCamp, selectedSchool , data]);
 
 	return (
 		<>

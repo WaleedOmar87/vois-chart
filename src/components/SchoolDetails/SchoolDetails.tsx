@@ -34,7 +34,7 @@ const SchoolDetails: React.FC = () => {
 			  )
 			: [];
 		setCurrentSchoolDetails(getData);
-	}, [selectedSchool]);
+	}, [data]);
 
 	// Get current school details based con selectedCountry and selectedCamp
 	return (
