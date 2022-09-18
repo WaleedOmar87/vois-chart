@@ -5,7 +5,7 @@ export const initialState = {
 	updateCamp: (camp: string, basedOnCountry: boolean) => {},
 	selectedSchool: "",
 	updateSchool: (school: string, basedOnCamp: boolean) => {},
-	themeMode: "dark",
+	themeMode: "light",
 	updateTheme: (theme: string) => {},
 	loading: true,
 	updateLoading: (status: boolean) => {}

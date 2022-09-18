@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {  useContext, useEffect, useState } from "react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -9,6 +9,7 @@ import {
 	Tooltip,
 	Legend,
 } from "chart.js";
+import { useNavigate } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { useFetch } from "../../hooks";
 import { AppContext } from "./../../store";
@@ -27,11 +28,15 @@ ChartJS.register(
 
 // Line chart component
 const LineChart: React.FC = () => {
+	const navigate = useNavigate();
 	// Get list of data, current country school and camp
 	const { data, error } = useFetch();
-	const { selectedCountry, selectedCamp, selectedSchool } = useContext(
-		AppContext
-	);
+	const {
+		selectedCountry,
+		selectedCamp,
+		selectedSchool,
+		updateSchool,
+	} = useContext(AppContext);
 	const [chartData, setChartData] = useState<any>({
 		labels: [
 			"Jan",
@@ -49,7 +54,6 @@ const LineChart: React.FC = () => {
 		],
 		datasets: [],
 	});
-
 	// Update filtered chart data based on county, camp or school change
 	useEffect(() => {
 		const getData = Object.keys(data).length
@@ -71,6 +75,19 @@ const LineChart: React.FC = () => {
 				<Line
 					data={chartData}
 					options={{
+						onClick: (event, element: any) => {
+							if (element.length) {
+								// Get clicked school data
+								let index = element[0].datasetIndex;
+								let school = chartData.datasets[index];
+
+								// Update selected school
+								updateSchool(school.label, false);
+
+								// Navigate to details page
+								navigate("/details");
+							}
+						},
 						plugins: {
 							title: {
 								display: true,
@@ -78,7 +95,10 @@ const LineChart: React.FC = () => {
 							},
 							legend: {
 								display: true,
-								position: "top",
+								position: "right",
+								labels: {
+									usePointStyle: true,
+								},
 							},
 						},
 					}}

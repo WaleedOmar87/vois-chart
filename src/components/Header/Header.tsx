@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
 	AppBar,
 	Box,
@@ -11,13 +11,19 @@ import {
 import { AppContext } from "../../store";
 
 const Header: React.FC = () => {
+	// store and update theme mode
 	const { themeMode, updateTheme } = useContext(AppContext);
 	const handleChange = (event: any) => {
-		updateTheme(event.target.checked ? "dark" : "light");
+		updateTheme(event.target.checked ? "light" : "dark");
 	};
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static">
+			<AppBar
+				position="static"
+				sx={{
+					backgroundColor: "#3e3e3e",
+				}}
+			>
 				<Toolbar>
 					<Typography
 						variant="h6"

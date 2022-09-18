@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Grid, CssBaseline } from "@mui/material";
-import { Header, Navigation, Chart, Loading } from "./../../components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+	Header,
+	Navigation,
+	Chart,
+	Loading,
+	SchoolDetails,
+} from "./../../components";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AppContext } from "../../store";
 import "./../../assets/css/App.css";
@@ -51,7 +58,15 @@ const Home: React.FC = () => {
 							<Navigation />
 						</Grid>
 						<Grid item xs={12}>
-							<Chart />
+							<Router>
+								<Routes>
+									<Route path="/" element={<Chart />} />
+									<Route
+										path="/details"
+										element={<SchoolDetails />}
+									/>
+								</Routes>
+							</Router>
 						</Grid>
 					</Grid>
 				)}

@@ -71,3 +71,17 @@ export const filterChartData = (
 	const filterSchools = removeDuplicates(getAllSchools, "school");
 	return groupSchoolsByMonth(filterSchools);
 };
+
+// Get school details
+export const getSchoolDetails = (
+	data: [],
+	country: string | null,
+	camp: string | null,
+	school: string | null
+): any => {
+	console.log(school);
+	const getAllSchools = data.filter((record: any) => {
+		return record.school === school;
+	});
+	return getAllSchools;
+};
