@@ -1,6 +1,6 @@
 # Chart Demo
 
-<a href="https://drive.google.com/file/d/19ZIfgAvD_YegMADpurSGnOUZe5iMvV1Y/preview"><img src="https://drive.google.com/uc?export=view&id=1cWwzpSn-J9LMM2uXLuQg4RigwGNVd4FR" /></a>
+## <a href="https://drive.google.com/file/d/19ZIfgAvD_YegMADpurSGnOUZe5iMvV1Y/preview">Video Demo</a>
 
 ## Description
 A basic React/Material UI chart application
