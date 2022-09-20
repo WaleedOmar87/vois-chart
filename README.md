@@ -9,3 +9,7 @@ A basic React/Material UI chart application
 
 ## Libraries Used
 - React, React Router v6, Material UI, Chartsjs, React-Chart-JS
+
+## Testing
+- Run "npm test" to start jest unit testing
+- Test files located in src/tests
