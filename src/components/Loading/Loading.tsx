@@ -5,9 +5,10 @@ import Box from "@mui/material/Box";
 const Loading: React.FC = () => {
 	return (
 		<Box
+			className="loading-screen"
 			sx={{
-				width: '200px' ,
-				margin: '50vh auto auto auto'
+				width: "200px",
+				margin: "50vh auto auto auto",
 			}}
 		>
 			<LinearProgress />

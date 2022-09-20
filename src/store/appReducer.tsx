@@ -7,7 +7,7 @@ export const initialState = {
 	updateSchool: (school: string, basedOnCamp: boolean) => {},
 	themeMode: "light",
 	updateTheme: (theme: string) => {},
-	loading: true,
+	loading: false,
 	updateLoading: (status: boolean) => {}
 };
 

@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -27,7 +27,7 @@ ChartJS.register(
 );
 
 // Line chart component
-const LineChart: React.FC = () => {
+const LineChart: React.FC | any = () => {
 	const navigate = useNavigate();
 	// Get list of data, current country school and camp
 	const { data, error } = useFetch();
@@ -65,46 +65,48 @@ const LineChart: React.FC = () => {
 			  )
 			: [];
 		setChartData({ ...chartData, datasets: getData });
-	}, [selectedCountry, selectedCamp, selectedSchool , data]);
+	}, [selectedCountry, selectedCamp, selectedSchool, data]);
 
-	return (
-		<>
-			{error || data.length < 1 ? (
-				<span>Error loading chart data</span>
-			) : (
-				<Line
-					data={chartData}
-					options={{
-						onClick: (event, element: any) => {
-							if (element.length) {
-								// Get clicked school data
-								let index = element[0].datasetIndex;
-								let school = chartData.datasets[index];
+	// Line chart
+	const renderChart = (
+		<Line
+			data-testid="line-chart-container"
+			data={chartData}
+			options={{
+				onClick: (event, element: any) => {
+					if (element.length) {
+						// Get clicked school data
+						let index = element[0].datasetIndex;
+						let school = chartData.datasets[index];
 
-								// Update selected school
-								updateSchool(school.label, false);
+						// Update selected school
+						updateSchool(school.label, false);
 
-								// Navigate to details page
-								navigate("/details");
-							}
+						// Navigate to details page
+						navigate("/details");
+					}
+				},
+				plugins: {
+					title: {
+						display: true,
+						text: "Click to toggle schools",
+					},
+					legend: {
+						display: true,
+						position: "right",
+						labels: {
+							usePointStyle: true,
 						},
-						plugins: {
-							title: {
-								display: true,
-								text: "Click to toggle schools",
-							},
-							legend: {
-								display: true,
-								position: "right",
-								labels: {
-									usePointStyle: true,
-								},
-							},
-						},
-					}}
-				/>
-			)}
-		</>
+					},
+				},
+			}}
+		/>
 	);
+
+	return error || data.length < 1
+		? `<span data-testid="error-container"><Error ${
+				error ? error : "Invalid Data, Chart Data Is Empty"
+		  }/span>`
+		: renderChart;
 };
 export default LineChart;

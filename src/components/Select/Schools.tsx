@@ -27,6 +27,7 @@ const SchoolsList: React.FC = () => {
 					<Select
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
+						data-testid="schools"
 						value={selectedSchool}
 						label="School"
 						onChange={handleChange}

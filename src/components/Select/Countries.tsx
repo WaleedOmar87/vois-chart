@@ -27,6 +27,7 @@ const CountriesList: React.FC = () => {
 						Select Country
 					</InputLabel>
 					<Select
+						data-testid="countries"
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
 						value={selectedCountry}

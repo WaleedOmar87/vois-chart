@@ -19,16 +19,18 @@ const Header: React.FC = () => {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar
+				className="app-bar"
 				position="static"
 				sx={{
 					backgroundColor: "#3e3e3e",
-					marginBottom: '1em'
+					marginBottom: "1em",
 				}}
 			>
 				<Toolbar>
 					<Typography
 						variant="h6"
 						component="div"
+						data-testid="app-bar-title"
 						sx={{ flexGrow: 1 }}
 					>
 						Number Of Lessons
