@@ -1,10 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { useFetch } from "./../../hooks";
+import { useFetch , useLocalStorage } from "./../../hooks";
 import { AppContext } from "../../store";
 
 const CampsList: React.FC = () => {
+	// Get local storage data
+	const [storage, updateStorage ] = useLocalStorage();
+
 	// Get list of camps
 	const { data, error } = useFetch();
 	const { camps } = data;
@@ -13,6 +16,7 @@ const CampsList: React.FC = () => {
 	const { selectedCamp, updateCamp } = useContext(AppContext);
 	// Set selected camp
 	const handleChange = (event: SelectChangeEvent) => {
+		updateStorage({ ...storage, camp: event.target.value as string });
 		updateCamp(event.target.value, true);
 	};
 

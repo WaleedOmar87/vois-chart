@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+	useContext,
+	useEffect,
+	useState,
+	useCallback,
+	useMemo,
+} from "react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -11,7 +17,7 @@ import {
 } from "chart.js";
 import { useNavigate } from "react-router-dom";
 import { Line } from "react-chartjs-2";
-import { useFetch } from "../../hooks";
+import { useFetch, useLocalStorage } from "../../hooks";
 import { AppContext } from "./../../store";
 import { filterChartData } from "./../../helpers";
 
@@ -28,12 +34,17 @@ ChartJS.register(
 
 // Line chart component
 const LineChart: React.FC | any = () => {
+	// Get local storage data
+	const [storage] = useLocalStorage();
+
 	const navigate = useNavigate();
 	// Get list of data, current country school and camp
 	const { data, error } = useFetch();
 	const {
 		selectedCountry,
+		updateCountry,
 		selectedCamp,
+		updateCamp,
 		selectedSchool,
 		updateSchool,
 	} = useContext(AppContext);
@@ -66,6 +77,21 @@ const LineChart: React.FC | any = () => {
 			: [];
 		setChartData({ ...chartData, datasets: getData });
 	}, [selectedCountry, selectedCamp, selectedSchool, data]);
+
+	// Fetch localStorage data on first mount
+	useMemo(() => {
+		if (Object.keys(storage).length) {
+			Object(storage as object).hasOwnProperty("country") &&
+				storage.country !== "" &&
+				updateCountry(storage.country as string);
+			Object(storage as object).hasOwnProperty("camp") &&
+				storage.camp !== "" &&
+				updateCamp(storage.camp as string, false);
+			Object(storage).hasOwnProperty("school") &&
+				storage.country !== "" &&
+				updateSchool(storage.school as string, false);
+		}
+	}, []);
 
 	// Line chart
 	const renderChart = (

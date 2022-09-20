@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { render, act, screen, waitFor } from "@testing-library/react";
 import { AppProvider } from "./../store";
 import { CampsList, CountriesList, SchoolsList } from "./../components";
-import { default as testData } from "./../data/testData";
+import { default as mockFetch } from "./../mocks/mockFetch";
+import testData from "../data/testData";
 import "mutationobserver-shim";
 
 // Testing select menu values
 describe("Testing Select Menus", () => {
 	// Test countries list
 	test("Test Countries Menu", async () => {
+		await mockFetch(testData as []);
 		render(
 			<AppProvider
 				value={{
@@ -27,6 +29,7 @@ describe("Testing Select Menus", () => {
 
 	// Test camps list
 	test("Test Camps Menu", async () => {
+		await mockFetch(testData as []);
 		render(
 			<AppProvider
 				value={{
@@ -37,14 +40,13 @@ describe("Testing Select Menus", () => {
 			</AppProvider>
 		);
 		await waitFor(() => {
-			expect(screen.queryByTestId("camps")).toHaveTextContent(
-				"Camp"
-			);
+			expect(screen.queryByTestId("camps")).toHaveTextContent("Camp");
 		});
 	});
 
 	// Test schools list
 	test("Test Schools Menu", async () => {
+		await mockFetch(testData as []);
 		render(
 			<AppProvider
 				value={{
@@ -55,9 +57,7 @@ describe("Testing Select Menus", () => {
 			</AppProvider>
 		);
 		await waitFor(() => {
-			expect(screen.queryByTestId("schools")).toHaveTextContent(
-				"School"
-			);
+			expect(screen.queryByTestId("schools")).toHaveTextContent("School");
 		});
 	});
 });

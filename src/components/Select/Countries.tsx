@@ -1,10 +1,13 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { useFetch } from "./../../hooks";
+import { useFetch, useLocalStorage } from "./../../hooks";
 import { AppContext } from "../../store";
 
 const CountriesList: React.FC = () => {
+	// Get local storage data
+	const [storage, updateStorage] = useLocalStorage();
+
 	// Fetch Countries List
 	const { data, error } = useFetch();
 	const { countries } = data;
@@ -14,6 +17,7 @@ const CountriesList: React.FC = () => {
 
 	// Update current country when select changes
 	const handleChange = (event: SelectChangeEvent) => {
+		updateStorage({ ...storage, country: event.target.value as string });
 		updateCountry(event.target.value as string);
 	};
 
